@@ -22,14 +22,14 @@ class _ReelsScreenState extends State<ReelsScreen> {
         centerTitle: false,
         title: Row(
           children: [
-            Text(
+            const Text(
               "Reels",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.keyboard_arrow_down,
                 color: Colors.white,
               ),
@@ -39,7 +39,7 @@ class _ReelsScreenState extends State<ReelsScreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.camera_alt_outlined),
+            icon: const Icon(Icons.camera_alt_outlined),
             color: Colors.white,
           )
         ],
@@ -48,73 +48,75 @@ class _ReelsScreenState extends State<ReelsScreen> {
         scrollDirection: Axis.vertical,
         itemCount: postList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: CachedNetworkImage(
-              imageUrl: "${postList[index].image}",
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                    colorFilter:
-                        ColorFilter.mode(Colors.black12, BlendMode.colorBurn),
-                  ),
-                ),
-                child: Center(
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [
-                                Colors.black.withOpacity(0.3),
-                                Colors.transparent
-                              ],
-                              begin: Alignment(0, -0.75),
-                              end: Alignment(0, 0.1)),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [
-                                Colors.black.withOpacity(0.3),
-                                Colors.transparent
-                              ],
-                              end: Alignment(0, -0.75),
-                              begin: Alignment(0, 0.1)),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Flexible(
-                                flex: 14,
-                                child: ReelDetail(
-                                  reel: postList[index],
-                                ),
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: ReelSideActionBar(
-                                  reel: postList[index],
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
+          return CachedNetworkImage(
+            imageUrl: postList[index].image,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.black12,
+                    BlendMode.colorBurn,
                   ),
                 ),
               ),
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              child: Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.black.withOpacity(0.3),
+                            Colors.transparent
+                          ],
+                          begin: const Alignment(0, -0.75),
+                          end: const Alignment(0, 0.1),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.black.withOpacity(0.3),
+                            Colors.transparent
+                          ],
+                          end: const Alignment(0, -0.75),
+                          begin: const Alignment(0, 0.1),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Flexible(
+                              flex: 14,
+                              child: ReelDetail(
+                                reel: postList[index],
+                              ),
+                            ),
+                            Flexible(
+                              flex: 2,
+                              child: ReelSideActionBar(
+                                reel: postList[index],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           );
         },
       ),

@@ -19,8 +19,12 @@ class CustomExploreAppBarSearchWiget extends StatelessWidget {
         child: TextField(
           cursorColor: Colors.grey.shade500,
           decoration: InputDecoration(
+            contentPadding: const EdgeInsets.only(left: 8),
             hintText: "Search",
-            hintStyle: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w500),
+            hintStyle: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
             border: InputBorder.none,
             prefixIcon: Icon(
               Icons.search,
@@ -28,7 +32,7 @@ class CustomExploreAppBarSearchWiget extends StatelessWidget {
               color: Colors.grey.shade500,
             ),
           ),
-          style: TextStyle(color: Colors.black, fontSize: 15),
+          style: const TextStyle(color: Colors.black, fontSize: 15),
         ),
       ),
     );

@@ -25,13 +25,13 @@ class _MainPagesState extends State<MainPages> {
     );
   }
 
-  HomeScreen _homeScreen = HomeScreen();
-  SearchScreen _searchScreen = SearchScreen();
-  PostScreen _postScreen = PostScreen();
-  ReelsScreen _reelsScreen = ReelsScreen();
-  ProfileScreen _profileScreen = ProfileScreen();
+  final HomeScreen _homeScreen = const HomeScreen();
+  final SearchScreen _searchScreen = const SearchScreen();
+  final PostScreen _postScreen = const PostScreen();
+  final ReelsScreen _reelsScreen = const ReelsScreen();
+  final ProfileScreen _profileScreen = const ProfileScreen();
 
-  late List<Widget> _pageList = [
+  late final List<Widget> _pageList = [
     _homeScreen,
     _searchScreen,
     _postScreen,
@@ -44,7 +44,7 @@ class _MainPagesState extends State<MainPages> {
       alignment: Alignment.center,
       child: PageView(
         controller: _pageController,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
           setState(() {
             _currentIndex = index;
@@ -56,50 +56,53 @@ class _MainPagesState extends State<MainPages> {
   }
 
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
+
   Widget get _buildBottom {
     return BottomNavigationBar(
-      unselectedItemColor: Colors.black87,
-      selectedItemColor: Colors.black,
-      currentIndex: _currentIndex,
+        unselectedItemColor: Colors.black87,
+        selectedItemColor: Colors.black,
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           _pageController.jumpToPage(index);
         },
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.home_filled,
                 color: Colors.black87,
                 size: 30,
               ),
               label: ""),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 CupertinoIcons.search,
                 color: Colors.black87,
                 size: 30,
               ),
               label: ""),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 CupertinoIcons.plus_app,
                 color: Colors.black87,
                 size: 30,
               ),
               label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.ondemand_video_rounded,
-                color: Colors.black87,
-                size: 30,
-              ),
-              label: ""),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.ondemand_video_rounded,
+              color: Colors.black87,
+              size: 30,
+            ),
+            label: "",
+          ),
           BottomNavigationBarItem(icon: _buildProfile, label: ""),
         ]);
   }
 
   Widget get _buildProfile {
-    return Container(
+    return SizedBox(
       height: 40,
       width: 40,
       // color: Colors.red,
@@ -114,17 +117,16 @@ class _MainPagesState extends State<MainPages> {
 
   Widget _buildImageProfile(MyProfileModel item) {
     return CachedNetworkImage(
-      imageUrl: "${item.image}",
+      imageUrl: item.image,
       imageBuilder: (context, imageProvider) {
         return Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: Container(
             width: 30,
             height: 30,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: imageProvider, fit: BoxFit.cover),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
               border: Border.all(color: Colors.white, width: 2),
             ),
           ),

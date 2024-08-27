@@ -14,11 +14,13 @@ class PostScreen extends StatelessWidget {
         title: Row(
           children: [
             IconButton(
-              onPressed: () {
-              },
-              icon: const Icon(Icons.clear),
+              onPressed: () {},
+              icon: const Icon(Icons.close),
             ),
-            const Text("New Post"),
+            const Text(
+              "New Post",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ],
         ),
         actions: [
@@ -27,9 +29,10 @@ class PostScreen extends StatelessWidget {
             child: const Text(
               "Next",
               style: TextStyle(
-                  color: Colors.blueAccent,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
+                color: Colors.blue,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           )
         ],
@@ -44,17 +47,21 @@ class PostScreen extends StatelessWidget {
                 color: Colors.grey,
                 child: CachedNetworkImage(
                   imageUrl:
-                      "https://th.bing.com/th/id/OIP.3pRAXytDG7baUNXn-cFVDgHaHa?pid=ImgDet&rs=1",
+                      "https://cdn.hackr.io/uploads/posts/attachments/1677927034t0ScViNfXE.png",
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                          colorFilter: const ColorFilter.mode(
-                              Colors.white, BlendMode.colorBurn)),
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.colorBurn,
+                        ),
+                      ),
                     ),
                   ),
-                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -75,8 +82,7 @@ class PostScreen extends StatelessWidget {
                               const Text(
                                 "Recents",
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               IconButton(
                                 onPressed: () {},
@@ -106,19 +112,21 @@ class PostScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: 5,),
+                              const SizedBox(
+                                width: 5,
+                              ),
                               Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.camera_alt_outlined),
-                                    color: Colors.white,
-                                  )
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.camera_alt_outlined),
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),

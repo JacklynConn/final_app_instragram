@@ -1,4 +1,10 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:finalapp/elements/user_list_element.dart';
+import 'package:finalapp/models/user_model.dart';
+import 'package:finalapp/pages/logics/login_logic.dart';
+import 'package:finalapp/pages/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -72,12 +78,16 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  TextEditingController usernameCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
+
   Widget get _buildUsernameTextField {
-    return const SizedBox(
+    return SizedBox(
       child: TextField(
+        controller: usernameCtrl,
         keyboardType: TextInputType.emailAddress,
         autocorrect: false,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Username",
           hintStyle: TextStyle(
             color: Colors.white,
@@ -101,6 +111,7 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: TextField(
+        controller: passwordCtrl,
         keyboardType: TextInputType.text,
         autocorrect: false,
         decoration: InputDecoration(
@@ -131,6 +142,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
   Widget get _buildLoginButton {
     return Container(
       margin: const EdgeInsets.only(top: 20),
@@ -142,10 +161,43 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          if (usernameCtrl.text.isEmpty || passwordCtrl.text.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Username and password must be filled"),
+              ),
+            );
+          } else if (EmailValidator.validate(
+                  usernameCtrl.text.toLowerCase().trim()) ==
+              false) {
+            _showSnackBar("Email format is not correct");
+          } else {
+            List<UserModel> foundList = userList
+                .where((element) =>
+                    element.email == usernameCtrl.text.toLowerCase().trim() &&
+                    element.password == passwordCtrl.text)
+                .toList();
+            if (foundList.isEmpty) {
+              _showSnackBar("Login Failed");
+            } else {
+              context.read<LoginLogic>().setLoggedInUser(foundList.first);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MainPages(),
+                ),
+              );
+            }
+          }
+        },
         child: const Text(
           "Login",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
         ),
       ),
     );
@@ -177,10 +229,7 @@ class _LoginPageState extends State<LoginPage> {
     return const Row(
       children: [
         Expanded(
-          child: Divider(
-            color: Colors.white,
-            height: 1
-          ),
+          child: Divider(color: Colors.white, height: 1),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -218,7 +267,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  Widget get _buildSignUp{
+
+  Widget get _buildSignUp {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: Row(

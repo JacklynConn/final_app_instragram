@@ -1,5 +1,6 @@
 import 'package:finalapp/elements/post_list_element.dart';
 import 'package:finalapp/elements/user_list_element.dart';
+import 'package:finalapp/pages/logics/login_logic.dart';
 import 'package:finalapp/pages/logics/post_logic.dart';
 import 'package:finalapp/pages/screens_of_main_page/favorite_notification.dart';
 import 'package:finalapp/pages/widgets/list_item_widget.dart';
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: _buildAppBar,
       body: _buildBody,
@@ -28,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   AppBar get _buildAppBar {
     bool isFavoriteListEmpty = context.watch<PostLogic>().isFavoriteListEmpty();
-
     return AppBar(
       title: Row(
         children: [

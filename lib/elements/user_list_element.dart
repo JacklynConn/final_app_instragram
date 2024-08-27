@@ -3,9 +3,9 @@ import '../models/user_model.dart';
 List<UserModel> userList = [
   UserModel(
     id: 101,
-    name: "Sok Visal Dara Pisey",
-    email: "sokvisal@gmail.com",
-    password: "sok123",
+    name: "makmachksp",
+    email: "makmach1122@gmail.com",
+    password: "11112222",
     tel: "010334455",
     image: "https://media.vanityfair.com/photos/5769ef6c26348ec1176bc9ad/master/pass/will-smith-movie-star.jpg",
   ),
@@ -27,8 +27,8 @@ List<UserModel> userList = [
   ),
   UserModel(
     id: 104,
-    name: "Sok Visal",
-    email: "sokvisal@gmail.com",
+    name: "Sok Dara",
+    email: "sokdara@gmail.com",
     password: "sok123",
     tel: "010334455",
     image: "https://th.bing.com/th/id/OIP.NqY3rNMnx2NXYo3KJfg43gHaHa?w=214&h=214&c=7&r=0&o=5&dpr=1.3&pid=1.7",

@@ -11,7 +11,9 @@ import '../widgets/list_item_widget.dart';
 
 class SearchDetail extends StatefulWidget {
   const SearchDetail({super.key, required this.item});
+
   final PostModel item;
+
   @override
   State<SearchDetail> createState() => _SearchDetailState();
 }
@@ -19,91 +21,88 @@ class SearchDetail extends StatefulWidget {
 class _SearchDetailState extends State<SearchDetail> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-     appBar: AppBar(
-       title: Text("Explore"),
-     ),
-     body: Container(
-       margin: EdgeInsets.only(bottom: 10),
-       child: Column(
-
-         children: [
-           _buildRowProfile,
-           _buildRowPicture,
-           _buildRowComment,
-           _buildRowLike,
-           _buildRowCaption,
-         ],
-       ),
-     ),
-   );
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Explore"),
+      ),
+      body: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        child: Column(
+          children: [
+            _buildRowProfile,
+            _buildRowPicture,
+            _buildRowComment,
+            _buildRowLike,
+            _buildRowCaption,
+          ],
+        ),
+      ),
+    );
   }
+
   Widget get _buildRowProfile {
     UserModel user =
         userList.where((element) => element.id == widget.item.userIdFK).single;
 
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              CachedNetworkImage(
-                imageUrl: user.image,
-                imageBuilder: (context, imageProvider) {
-                  return Container(
-                    margin: EdgeInsets.all(5),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          width: 33,
-                          height: 33,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                              colors: [Colors.yellow, Colors.purple],
-                            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            CachedNetworkImage(
+              imageUrl: user.image,
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  margin: const EdgeInsets.all(5),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: 33,
+                        height: 33,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                            colors: [Colors.yellow, Colors.purple],
                           ),
                         ),
-                        Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover),
-                              border:
-                              Border.all(color: Colors.white, width: 2)),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                placeholder: (context, url) => Container(
-                  color: Colors.grey[50],
-                ),
-                errorWidget: (context, url, error) => Container(
-                  color: Colors.grey[200],
-                ),
+                      ),
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                            border: Border.all(color: Colors.white, width: 2)),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              placeholder: (context, url) => Container(
+                color: Colors.grey[50],
               ),
-              Container(
-                width: 200,
-                child: Text(
-                  '${user.name}',
-                  overflow: TextOverflow.ellipsis,
-                ),
+              errorWidget: (context, url, error) => Container(
+                color: Colors.grey[200],
               ),
-            ],
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.more_horiz),
-          ),
-        ],
-      ),
+            ),
+            SizedBox(
+              width: 200,
+              child: Text(
+                '${user.name}',
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.more_horiz),
+        ),
+      ],
     );
   }
 
@@ -135,16 +134,18 @@ class _SearchDetailState extends State<SearchDetail> {
               IconButton(
                 onPressed: () {
                   if (isFavorite) {
-                    context.read<PostLogic>().removePostFromFavorite(widget.item);
+                    context
+                        .read<PostLogic>()
+                        .removePostFromFavorite(widget.item);
                   } else {
                     context.read<PostLogic>().addPostToFavorite(widget.item);
                   }
                 },
                 icon: isFavorite
                     ? Icon(
-                  CupertinoIcons.heart_fill,
-                  color: Colors.red,
-                )
+                        CupertinoIcons.heart_fill,
+                        color: Colors.red,
+                      )
                     : Icon(CupertinoIcons.heart),
               ),
               IconButton(

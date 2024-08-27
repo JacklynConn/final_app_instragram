@@ -1,4 +1,6 @@
+import 'package:finalapp/pages/logics/login_logic.dart';
 import 'package:finalapp/pages/logics/post_logic.dart';
+import 'package:finalapp/pages/login_page.dart';
 import 'package:finalapp/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => PostLogic()),
+        ChangeNotifierProvider(create: (context) => LoginLogic()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MainPages(),
+        home: const LoginPage(),
       ),
     );
   }

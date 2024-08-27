@@ -1,6 +1,5 @@
-import 'package:finalapp/elements/post_list_element.dart';
-import 'package:finalapp/pages/screens_of_main_page/search_detail.dart';
-import 'package:finalapp/pages/widgets/search_wiget.dart';
+import '/elements/post_list_element.dart';
+import '/pages/widgets/search_wiget.dart';
 import 'package:flutter/material.dart';
 import 'package:staggered_grid_view_flutter/widgets/sliver.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
@@ -16,7 +15,7 @@ class SearchScreen extends StatelessWidget {
       child: SafeArea(
         child: CustomScrollView(
           slivers: [
-            CustomExploreAppBarSearchWiget(),
+            const CustomExploreAppBarSearchWiget(),
             SliverStaggeredGrid.countBuilder(
                 mainAxisSpacing: 1,
                 crossAxisSpacing: 1,
@@ -32,7 +31,9 @@ class SearchScreen extends StatelessWidget {
                   return StaggeredTile.count(cXCellCount, mXCellcount);
                 },
                 itemBuilder: (BuildContext, int index) {
-                  return SearchWiget(post: postList[index]);
+                  return SearchWiget(
+                    post: postList[index],
+                  );
                 },
                 itemCount: 10)
           ],

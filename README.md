@@ -1,3 +1,4 @@
+![Screenshot 2023-10-28 001226](https://github.com/JacklynConn/final_app_instragram/assets/148744079/dffe385b-406b-4fd5-976e-7e427d6c7c02)
 # finalapp
 
 A new Flutter project.

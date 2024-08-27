@@ -22,9 +22,8 @@ class _SearchDetailWigetState extends State<SearchDetailWiget> {
   }
 
   AppBar get _buildAppBar {
-
     return AppBar(
-      title: Row(
+      title: const Row(
         children: [
           Text(
             "Notifications",
@@ -51,12 +50,11 @@ class _SearchDetailWigetState extends State<SearchDetailWiget> {
   }
 
   Widget get _buildListView {
-
     List<PostModel> favoriteList = context.watch<PostLogic>().favoriteList;
 
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: postList.length,
       itemBuilder: (BuildContext context, int index) {
         return ListItemWidget(
